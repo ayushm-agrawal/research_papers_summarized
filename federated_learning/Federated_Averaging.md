@@ -41,7 +41,7 @@ In the paper, the authors assume a synchronous update scheme that proceeds in th
 
 The authors mentioned that although most of their focus is on non-convex neural network objectives, the algorithm is applicable to any finite-sum objective of the following form:
 
-> <img src="https://render.githubusercontent.com/render/math?math=\min\limits_{w \in \R^d} f(w)\;$ where $f(w) = \frac{1}{n} \sum\nolimits_{i=1}^{n} f_i(w)" />
+> <img src="https://render.githubusercontent.com/render/math?math=\min\limits_{w\in\R^d}f(w)"/> where <img src="https://render.githubusercontent.com/render/math?math=f(w) = \frac{1}{n} \sum\nolimits_{i=1}^{n} f_i(w)" />
 
 In Machine Learning, <img src="https://render.githubusercontent.com/render/math?math=f_i(w)"/> is the loss of the prediction on example <img src="https://render.githubusercontent.com/render/math?math=(x_i, y_i)"/> made with model parameters <img src="https://render.githubusercontent.com/render/math?math=w"/>.
 
@@ -109,7 +109,7 @@ Two ways for paritioning data-
 
 There are various techniques used in the paper to tune the hyperparameters.
 
-- **Increasing Parallelism**: Multiple values for client fraction **C** (controls the amount of multi-client parallelism) was experimented with. A learning curve for each combination of parameter was constructed optimizing <img src="https://render.githubusercontent.com/render/math?math=\eta"/>, between <img src="https://render.githubusercontent.com/render/math?math=10^\frac{1}{3}$ and $10^\frac{1}{6}"/>, and then making each cureve monotonically impriving by taking the best value of test-set accuracy achieved over all prior rounds.
+- **Increasing Parallelism**: Multiple values for client fraction **C** (controls the amount of multi-client parallelism) was experimented with. A learning curve for each combination of parameter was constructed optimizing <img src="https://render.githubusercontent.com/render/math?math=\eta"/>, between <img src="https://render.githubusercontent.com/render/math?math=10^\frac{1}{3}"/> and <img src="https://render.githubusercontent.com/render/math?math=10^\frac{1}{6}"/>, and then making each cureve monotonically impriving by taking the best value of test-set accuracy achieved over all prior rounds.
 
 ![MNIST Increasing parallelism](../assets/fed_avg/mnist_increasing_parallelism.png)
 
