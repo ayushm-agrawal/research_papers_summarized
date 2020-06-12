@@ -58,7 +58,7 @@ In Federated Optimization, SGD can be applied naively, where a single batch grad
 
 In this algorithm, each client locally takes one steps of gradient descent on the current model using its local data, and the server then takes a weighted average of the resulting models. Once the algorithm is written this way, we can add more computation to each client by iterating the local update <img src="https://render.githubusercontent.com/render/math?math=w^k \leftarrow w^k - \eta\nabla F_k(w^k)"/> multiple times before the averaging step.
 
-The amount of computation is controlled by three ke parameters: 
+The amount of computation is controlled by three parameters: 
 
 - **C**, the graction of clients that perform computation on each round.
 - **E**, the number of training passes each client makes over its local dataset on each round.
