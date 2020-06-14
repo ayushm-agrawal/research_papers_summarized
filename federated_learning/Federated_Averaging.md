@@ -1,5 +1,5 @@
 
-# Communication-Efficient Learning of Deep Netowkrs from Decentralized Data
+# Communication-Efficient Learning of Deep Networks from Decentralized Data
 
 ## Problem
 
