@@ -1,6 +1,7 @@
 
 # Communication-Efficient Learning of Deep Networks from Decentralized Data
 
+
 ## Problem
 
 Modern devices have a wealth of data that can allow great learning for models. This can provide a great and personal user-experience. 
