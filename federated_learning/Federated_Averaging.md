@@ -31,14 +31,14 @@ The main idea of Federated Learning **(FL)** is the concept of keeping user data
 
 ### Federated Optimization
 
-Optimization problem in FL is referred to as Federated Optimization. The several key properties in Federated Optimization. For this paper, we will be focusing on two:
+Optimization problem in FL is referred to as Federated Optimization. There are several key properties in Federated Optimization. For this paper, we will be focusing on two:
 
 - **Non-IID** The training data on a given client is typically based on the usage of the mobile device by a particular user, and hence any particular user's local dataset will note be representative of the population distribution.
 - **Unbalanced** Some users will make much heavier use of the service or app than others, leading to varying amounts of local training data.
 
 In the paper, the authors assume a synchronous update scheme that proceeds in the rounds of communication. It goes as follows
 
-> There is a fixed set of K clients, each with a fixed local dataset. At the beginning of each round, a random fraction C of clients is selected, and the server sends the current global algorithm state to each of these clients. By only selecting a fraction of clients for efficiency, experiments show diminishing returns for adding more clients beyond a certain point. Each selected client then performs local computation based on the global state and its local dataset, and sends an update to the server. **The server then applies these updates to tits global state, and the process repeats.**
+> There is a fixed set of K clients, each with a fixed local dataset. At the beginning of each round, a random fraction C of clients is selected, and the server sends the current global algorithm state to each of these clients. By only selecting a fraction of clients for efficiency, experiments show diminishing returns for adding more clients beyond a certain point. Each selected client then performs local computation based on the global state and its local dataset, and sends an update to the server. **The server then applies these updates to its global state, and the process repeats.**
 
 The authors mentioned that although most of their focus is on non-convex neural network objectives, the algorithm is applicable to any finite-sum objective of the following form:
 
@@ -63,7 +63,7 @@ The amount of computation is controlled by three parameters:
 
 - **C**, the fraction of clients that perform computation on each round.
 - **E**, the number of training passes each client makes over its local dataset on each round.
-- **B**, the local minibatch size used for client updates. <img src="https://render.githubusercontent.com/render/math?math=B=\infty"/> indixares that the full local dataset is treated as a single minibatch.
+- **B**, the local minibatch size used for client updates. <img src="https://render.githubusercontent.com/render/math?math=B=\infty"/> indices that the full local dataset is treated as a single minibatch.
   
 > For <img src="https://render.githubusercontent.com/render/math?math=B=\infty"/> and <img src="https://render.githubusercontent.com/render/math?math=E=1"/>, this algorithm is equivalent to *FederatedSGD*.
 
