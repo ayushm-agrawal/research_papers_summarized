@@ -11,14 +11,14 @@ Apart from the privacy issue, this data is often very large in quantity which wi
 
 ## Primary Contributions
 
-1. The identification of problem of training on decentralized data from mobile devices. 
+1. The identification of the problem of training on decentralized data from mobile devices. 
    
-2. Selection of a straightforward and practival algorithm that can be applied to this setting.
+2. Selection of a straightforward and practical algorithm that can be applied to this setting.
 3. Extensive empirical evaluation of the proposed approach.
    
 ## Algorithm/Solution
 
-This paper advocates an alternative to the problems above by a new approach where the training data is left distributed on the devices. The global model rlearns by aggregating locally-computed updates. 
+This paper advocates an alternative to the problems above by a new approach where the training data is left distributed on the devices. The global model learns by aggregating locally-computed updates. 
 
 The paper labels this decentralized approach as **Federated Learning**. The name *Federated Learning* comes from the fact that the learning task is solved by a loose federation of participating devices (referred as clients). These clients are coordinated by a central server.
 
@@ -26,18 +26,18 @@ With this decentralized approach, this paper released a new algorithm labelled a
 
 ### Federated Learning
 
-The main idea of Federated Learning **(FL)** is the concept of keeping user data private. Even if the data in the data centers is "anonymized", it can still put the users at risk via join with other data. In FL, the information transmitted is the minimal update necessary to improve a particular model. The updates themselves don't contain extra information than what is actually required. The source of these updates can be transmitted of trusted third party without identifying the meta-data.
+The main idea of Federated Learning **(FL)** is the concept of keeping user data private. Even if the data in the data centers is "anonymized", it can still put the users at risk via join with other data. In FL, the information transmitted is the minimal update necessary to improve a particular model. The updates themselves don't contain extra information than what is actually required. The source of these updates can be transmitted by trusted third parties without identifying the meta-data.
 
 ### Federated Optimization
 
 Optimization problem in FL is referred to as Federated Optimization. The several key properties in Federated Optimization. For this paper, we will be focusing on two:
 
-- **Non-IID** The training data on a given client is typically based on the udage of the mobile device by ap articular user, and hence any particular user's local dataset will note be representative of the population distribution.
+- **Non-IID** The training data on a given client is typically based on the usage of the mobile device by a particular user, and hence any particular user's local dataset will note be representative of the population distribution.
 - **Unbalanced** Some users will make much heavier use of the service or app than others, leading to varying amounts of local training data.
 
 In the paper, the authors assume a synchronous update scheme that proceeds in the rounds of communication. It goes as follows
 
-> There is a fixed set of K clients, each with a fixed local dataset. At the beginning of each round, a random fraction C of clients is selected, and the server sends the current global algorithm state to each of these clients. By only selecting a fraction of clients for efficiency, experiments show diminishing returns for adding more clients beyong a certain point. Each selected client then performs local computation based on teh global state and its local dataset, and sends and update to the server. **The server then applies these updates to tits global state, and the process repeats.**
+> There is a fixed set of K clients, each with a fixed local dataset. At the beginning of each round, a random fraction C of clients is selected, and the server sends the current global algorithm state to each of these clients. By only selecting a fraction of clients for efficiency, experiments show diminishing returns for adding more clients beyond a certain point. Each selected client then performs local computation based on the global state and its local dataset, and sends an update to the server. **The server then applies these updates to tits global state, and the process repeats.**
 
 The authors mentioned that although most of their focus is on non-convex neural network objectives, the algorithm is applicable to any finite-sum objective of the following form:
 
@@ -52,15 +52,15 @@ For FL, we assume that there are <img src="https://render.githubusercontent.com/
 ### The Federated Averaging Algorithm
 
 #### FederatedSGD
-In Federated Optimization, SGD can be applied naively, where a single batch gradient calculation (on a random client) is done per round of communication. In FL setting, there is a little cost in wall-clock time to involvinng more clients. To overcome this, the baseline algorithm used is referred as *FederatedSGD*. In this, **C** fraction of clients are selected on each round, and then the gradient fo the loss over all the data held by these clients is computed. **C** controls the *global* batch size, where **C=1** corresponds to non-stochastic gradient descent.
+In Federated Optimization, SGD can be applied naively, where a single batch gradient calculation (on a random client) is done per round of communication. In the FL setting, there is a little cost in wall-clock time to involve more clients. To overcome this, the baseline algorithm used is referred as *FederatedSGD*. In this, **C** fraction of clients are selected on each round, and then the gradient of the loss over all the data held by these clients is computed. **C** controls the *global* batch size, where **C=1** corresponds to non-stochastic gradient descent.
 
 #### FederatedAveraging
 
-In this algorithm, each client locally takes one steps of gradient descent on the current model using its local data, and the server then takes a weighted average of the resulting models. Once the algorithm is written this way, we can add more computation to each client by iterating the local update <img src="https://render.githubusercontent.com/render/math?math=w^k \leftarrow w^k - \eta\nabla F_k(w^k)"/> multiple times before the averaging step.
+In this algorithm, each client locally takes one step of gradient descent on the current model using its local data, and the server then takes a weighted average of the resulting models. Once the algorithm is written this way, we can add more computation to each client by iterating the local update <img src="https://render.githubusercontent.com/render/math?math=w^k \leftarrow w^k - \eta\nabla F_k(w^k)"/> multiple times before the averaging step.
 
 The amount of computation is controlled by three parameters: 
 
-- **C**, the graction of clients that perform computation on each round.
+- **C**, the fraction of clients that perform computation on each round.
 - **E**, the number of training passes each client makes over its local dataset on each round.
 - **B**, the local minibatch size used for client updates. <img src="https://render.githubusercontent.com/render/math?math=B=\infty"/> indixares that the full local dataset is treated as a single minibatch.
   
@@ -87,12 +87,12 @@ Three datasets were used:
 
 For MNIST Classification task, two models were used, namely:
 
-1. A simple multi-layer perceptron with 2 hiddent layers with 200 units each using ReLU activations.
+1. A simple multilayer perceptron with 2 hidden layers with 200 units each using ReLU activations.
 2. A CNN with two 5X5 convolution layers , 32 and 64 channels respectively. Each of these layers were passed through Max Pooling layers of size 2X2.
 
 #### Data Partitioning 
 
-Two ways for paritioning data- 
+Two ways for partitioning data- 
 
 1. IID (Independent and Identically Distributed)
    1. data is shuffled
@@ -103,13 +103,13 @@ Two ways for paritioning data-
    2. Divide it into 200 shards. Each shard is of size 300
    3. Assign each of 100 clients 2 shards.
 
-    > Note here that this is pathological non-IID partition as most of the clients will only have examples of 2 digits from the dataset of 10 digits.
+    > Note here that this is a pathological non-IID partition as most of the clients will only have examples of 2 digits from the dataset of 10 digits.
 
 #### Hyperparameter Tuning
 
 There are various techniques used in the paper to tune the hyperparameters.
 
-- **Increasing Parallelism**: Multiple values for client fraction **C** (controls the amount of multi-client parallelism) was experimented with. A learning curve for each combination of parameter was constructed optimizing <img src="https://render.githubusercontent.com/render/math?math=\eta"/>, between <img src="https://render.githubusercontent.com/render/math?math=10^\frac{1}{3}"/> and <img src="https://render.githubusercontent.com/render/math?math=10^\frac{1}{6}"/>, and then making each cureve monotonically impriving by taking the best value of test-set accuracy achieved over all prior rounds.
+- **Increasing Parallelism**: Multiple values for client fraction **C** (controls the amount of multi-client parallelism) was experimented with. A learning curve for each combination of parameter was constructed optimizing <img src="https://render.githubusercontent.com/render/math?math=\eta"/>, between <img src="https://render.githubusercontent.com/render/math?math=10^\frac{1}{3}"/> and <img src="https://render.githubusercontent.com/render/math?math=10^\frac{1}{6}"/>, and then making each curve monotonically improving by taking the best value of test-set accuracy achieved over all prior rounds.
 
 ![MNIST Increasing parallelism](../assets/fed_avg/mnist_increasing_parallelism.png)
 
