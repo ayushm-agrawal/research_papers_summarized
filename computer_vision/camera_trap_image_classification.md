@@ -12,6 +12,8 @@
       - [~~Task 3 (Counting Animals)~~](#stask-3-counting-animalss)
       - [~~Task 4 (Additional Attributes)~~](#stask-4-additional-attributess)
   - [Experiments](#experiments)
+    - [Results](#results)
+  - [Conclusions](#conclusions)
 
 
 ## Problem
@@ -90,10 +92,52 @@ The first stage was solving the binary classification task. This was the Task 1.
 
 The training set for this task contained 1.4 million images and the test set contained 105,000 images. 
 
+
 > SS dataset contains labels for capture events so all the images in a single capture event were assigned the same label. 
 
-**VGG a
 
-In the second stage, most of the information-extraction was done. This stage included three tasks, namely task 2, task 3 and task 4. One model was trained to simultaneously perform all of these three tasks. This technique is popularly called *Multi-task Learning*. 
+![Task One Top 1 Accuracy](../assets/camera_trap/animals_vs_blank_accuracy.png)
 
-The reason for doing this, was since these three tasks are related. 
+**VGG model achieved the best accuracy of 96.8%**
+
+---
+
+In the second stage, most of the information-extraction was done. This stage included three tasks, namely identifying animals, counting animals and additional attributed. One model was trained to simultaneously perform all of these three tasks. This technique is popularly called *Multi-task Learning*. 
+
+The reason for doing this, was since these three tasks are related, they can share weights that encode features common to all tasks. This technique also requires fewer model parameters vs. a separate model for each task. This allows that all the tasks can be solved faster with more efficiency. 
+
+For identifying animals, the corresponding output layer produced the probabilities of the input image being one of the 48 possible species. Top-1 and Top-5 accuracies were reported for this task. 
+
+> **Top-5** accuracy is useful for this research as it can help reduce the human labor effort in classifying the animal species.
+
+The models were tested on the expert-labeled test set and the *model ensemble* had 94.9% top-1 and 99.1% top-5 accuracy. 
+
+On the volunteer labelled test set the accuracies were reported in the graph below.
+
+![Task 2 Volunteer Label Test Accuracy](../assets/camera_trap/task_2_volunteer_acc.png)
+
+**Resnet 152 was the best single model in this test set**.
+
+### Results
+
+Two-staged pipeline was created where the VGG model was first used to classify whether the image had an animal present or not. If there was an animal present then, the image was passed through the ensemble model to classify the species of the animal and other tasks. 
+
+The authors reported that for Task 1, detecting images that contain animals, expert-provided labels were not present and thus did not know the accuracy of the human volunteers. This was assumed to be same 96.6% accuracy as on the species identification tasks by human volunteers. 
+
+Since VGG performed better than the volunteers' accuracy, it was assumed that the 75% of empty image labelling was achieved with an 100% confidence. 
+
+For Task 2, identifying species, the confidence threshold was set at 43% so the emsemble model was able to automatically process 97.2% of the remaning non-empty images (25% of data) at human-level accuracy. 
+
+The total accuracy of 96.6% of this pipeline of automating labelling was achieved for 
+
+> (75% X 100%) *binary* + (25% X 97.2%) *multiclass* = 99.3% 
+
+of the data.
+
+
+## Conclusions
+
+This paper shows that we can automate the task of labelling animal species from camera trap images in a large dataset. This paper shows that we can do this process efficiently and help reduce the manual labor and hours by human volunteers. 
+
+The system created by the authors can save 99.3% of the manual labor on animal identification task. This is great than **17,000** hours of work put by manual levels. The paper also shows that this system can not only help save the time, but also do this task at the same human-level accuracy of 96.6%.
+
