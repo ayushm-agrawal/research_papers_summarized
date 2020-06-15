@@ -18,11 +18,11 @@
 
 ## Problem
 
-To better understand the complexities of natural ecosystems and better manage and protect thenm it would be helpful to have detailed, large-scale knowledge about the number, location, and behaviors of animals in the natural ecosystems. 
+To better understand the complexities of natural ecosystems and better manage and protect them it would be helpful to have detailed, large-scale knowledge about the number, location, and behaviors of animals in the natural ecosystems. 
 
 Currently, we use motion sensor cameras in natural habitats to assist with this task. These cameras take millions of images but the task of labelling these images, categorizing animals remain a hard task. Human volunteers have to manually go through each image and classify it as an animal or empty. This is very time-consuming and results in errors. 
 
-In the **Snapshot Serengeti (SS)** project where a huge volunteer force was harnessed to label these images, the human volutneer specials and count labels are estimated to be 96.6% and 90.0% accuracte respectively.
+In the **Snapshot Serengeti (SS)** project where a huge volunteer force was harnessed to label these images, the human volunteer specials and count labels are estimated to be 96.6% and 90.0% accuracte respectively.
 
 ### Snapshot Serengeti (SS) Project
 
@@ -30,7 +30,7 @@ The world's largest camera-trap project published to date, SS has 225 camera tra
 
 For this project, 28,000 registered and 40,000 unregistered volunteer have labeled 1.2 million SS capture events. 
 
-For each image set, multiple useers label the species, number of individuals, various behaviours, and the presence of young.
+For each image set, multiple users label the species, number of individuals, various behaviours, and the presence of young.
 
 ## Current Work
 
@@ -52,7 +52,7 @@ Out of the 301,400 capture events 284,400 random capture events were put in the 
 
 ## Architectures
 
-Nine different architectures were tested to find the highest-performing networks. Each model was only trained one time because it is computationally expensive. Also, it is theoretically and empirically suggested that different Deep Neural Networks trained with teh same architecture but initialized differently, often converge to similar performance levels. 
+Nine different architectures were tested to find the highest-performing networks. Each model was only trained one time because it is computationally expensive. Also, it is theoretically and empirically suggested that different Deep Neural Networks trained with the same architecture but initialized differently, often converge to similar performance levels. 
 
 The following architectures were used:
 <pre>
